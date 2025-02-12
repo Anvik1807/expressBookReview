@@ -68,7 +68,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
         let newReview = req.body.review;
         review = Object.assign({}, review, newReview);
 
-        objectValue[0].reviews = review; 
+        filteredBook[0].reviews = review; 
         res.send(filteredBook);
    } else {
         res.send("Unable to find Book!");
