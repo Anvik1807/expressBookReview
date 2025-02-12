@@ -59,23 +59,19 @@ regd_users.post("/login", (req,res) => {
 
 // Add a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
-    const email = req.params.email;
-    let friend = friends[email];  // Retrieve friend object associated with email
-    if (friend) {  // Check if friend exists
-        let DOB = req.body.DOB;
-        // Add similarly for firstName
-        // Add similarly for lastName
-        // Update DOB if provided in request body
-        if (DOB) {
-            friend["DOB"] = DOB;
-        }
-        // Add similarly for firstName
-        // Add similarly for lastName
-        friends[email] = friend;  // Update friend details in 'friends' object
-        res.send(`Friend with the email ${email} updated.`);
-    } else {
-        // Respond if friend with specified email is not found
-        res.send("Unable to find friend!");
+    const isbn = req.params.isbn;
+    let filteredBook = Object.values(books).filter((book) => book.isbn === isbn);
+  if (filteredBook.length > 0) {
+    let string = JSON.stringify(filteredBook);
+    let objectValue = JSON.parse(string);
+   let review = objectValue[0].reviews;
+        let newReview = req.body.review;
+        review = Object.assign({}, review, newReview);
+
+        objectValue[0].reviews = review; 
+        res.send(filteredBook);
+   } else {
+        res.send("Unable to find Book!");
     }
   return res.status(300).json({message: "Yet to be implemented"});
 });
