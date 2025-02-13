@@ -38,6 +38,13 @@ public_users.post("/register", (req,res) => {
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
   //Write your code here
+  let myPromise1 = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve(JSON.stringify(books,null,4))
+    },6000)});
+    myPromise1.then((successMessage) => {
+    console.log("From Callback " + successMessage)
+    });
   res.send(JSON.stringify(books,null,4));
   return res.status(300).json({message: "Yet to be implemented"});
 });
@@ -49,6 +56,13 @@ public_users.get('/isbn/:isbn',function (req, res) {
   let filteredBook = Object.values(books).filter((book) => book.isbn === isbn);
   if (filteredBook.length > 0) {
   res.send(filteredBook);
+  let myPromise1 = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve(JSON.stringify(filteredBook))
+    },6000)});
+    myPromise1.then((successMessage) => {
+    console.log("From Callback " + successMessage)
+    });
   } else {
     res.send(`ISBN attribute ${isbn} not found`);
   }
@@ -62,6 +76,13 @@ public_users.get('/author/:author',function (req, res) {
   let filteredBook = Object.values(books).filter((book) => book.author === author);
   if (filteredBook.length > 0) {
   res.send(filteredBook);
+  let myPromise1 = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve(JSON.stringify(filteredBook))
+    },6000)});
+    myPromise1.then((successMessage) => {
+    console.log("From Callback " + successMessage)
+    });
   } else {
     res.send(`Author ${author} not found`);
   }
@@ -75,6 +96,13 @@ public_users.get('/title/:title',function (req, res) {
   let filteredBook = Object.values(books).filter((book) => book.title === title);
   if (filteredBook.length > 0) {
   res.send(filteredBook);
+  let myPromise1 = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve(JSON.stringify(filteredBook))
+    },6000)});
+    myPromise1.then((successMessage) => {
+    console.log("From Callback " + successMessage)
+    });
   } else {
     res.send(`Book Title ${title} not found`);
   }
